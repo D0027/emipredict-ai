@@ -124,5 +124,4 @@ st.markdown("---")
 st.caption(
     "Built on Steps 1–5 of the EMIPredict AI project guidance (data prep, EDA, feature "
     "engineering, model training, MLflow tracking) run on Kaggle. This app implements Step 6 "
-    "(Streamlit application) — ready for Step 7 (Streamlit Cloud deployment)."
 )
