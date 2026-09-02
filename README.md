@@ -201,7 +201,7 @@ This project is open-sourced under the **MIT License**.
 
 <div align="center">
 
-Built by **Dhruv** — AI/ML Developer
+Built by **Deepak** — AI/ML Developer
 
 [![GitHub](https://img.shields.io/badge/GitHub-D0027-181717?style=for-the-badge&logo=github)](https://github.com/D0027)
 [![Live App](https://img.shields.io/badge/🚀_Live_App-Visit-3EC6A8?style=for-the-badge)](https://emipredict-ai-027.streamlit.app/)
