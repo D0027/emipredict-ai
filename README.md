@@ -12,10 +12,27 @@
 [![XGBoost](https://img.shields.io/badge/XGBoost-006ACC?style=for-the-badge)](https://xgboost.ai/)
 [![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)](https://mlflow.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](#)
+[![Last Commit](https://img.shields.io/github/last-commit/D0027/emipredict-ai?style=for-the-badge&color=3EC6A8)](https://github.com/D0027/emipredict-ai)
 
 **[🔗 Launch the Live App →](https://emipredict-ai-027.streamlit.app/)**
 
 </div>
+
+---
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Key Results](#-key-results)
+- [App Pages](#️-app-pages)
+- [Tech Stack](#️-tech-stack)
+- [Architecture](#-architecture)
+- [Project Structure](#-project-structure)
+- [Run Locally](#-run-locally)
+- [Model Training Pipeline](#-model-training-pipeline)
+- [Roadmap](#-roadmap)
+- [License](#-license)
+- [Contact](#-contact)
 
 ---
 
@@ -76,6 +93,25 @@ Trained on **400,000 records** across 5 EMI scenarios, with **33 engineered feat
 
 **Models compared — Classification:** `XGBoost` · `Random Forest` · `Decision Tree` · `Logistic Regression`
 **Models compared — Regression:** `XGBoost Regressor` · `Random Forest` · `Decision Tree` · `Linear Regression`
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    A[Kaggle Notebook<br>Data Prep + EDA + Training] -->|exports .pkl + CSVs| B[artifacts/]
+    B --> C[Streamlit App]
+    C --> D[🏠 Home]
+    C --> E[📊 Data Exploration]
+    C --> F[🎯 Prediction Engine]
+    C --> G[📈 Model Performance]
+    C --> H[🗄️ Data Management]
+    F -->|save prediction| I[(SQLite DB)]
+    H -->|CRUD| I
+    A -->|logs runs| J[(MLflow Tracking)]
+    G -->|reads| J
+```
 
 ---
 
@@ -141,17 +177,34 @@ All training was performed on Kaggle; this app loads the exported artifacts and 
 
 ---
 
+## 🗺️ Roadmap
+
+- [x] Multi-page Streamlit app with custom UI/UX
+- [x] Real-time classification + regression predictions
+- [x] Interactive EDA dashboard
+- [x] MLflow experiment tracking + public-safe experiment log
+- [x] CRUD data management (SQLite)
+- [x] Streamlit Cloud deployment
+- [ ] Authentication for the Data Management page
+- [ ] REST API endpoint for external integrations
+- [ ] Batch prediction via CSV upload
+
+---
+
 ## 📄 License
 
 This project is open-sourced under the **MIT License**.
 
 ---
 
+## 📬 Contact
+
 <div align="center">
 
-**Built with ❤️ using Python, Streamlit & Scikit-learn**
+Built by **Dhruv** — AI/ML Developer
 
-[🔗 Live App](https://emipredict-ai-027.streamlit.app/) &nbsp;·&nbsp; [🐛 Report an Issue](#)
+[![GitHub](https://img.shields.io/badge/GitHub-D0027-181717?style=for-the-badge&logo=github)](https://github.com/D0027)
+[![Live App](https://img.shields.io/badge/🚀_Live_App-Visit-3EC6A8?style=for-the-badge)](https://emipredict-ai-027.streamlit.app/)
 
 ⭐ **If you found this project useful, consider giving it a star!** ⭐
 
