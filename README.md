@@ -1,97 +1,147 @@
-# EMIPredict AI — Local Streamlit App
+<div align="center">
 
-Implements **Step 6 (Streamlit application)** of the EMIPredict AI project guidance, built on
-top of the models trained in `emipredict-ai-notebook.ipynb` on Kaggle (Steps 1–5).
+# 💳 EMIPredict AI
 
-This app does **not** retrain anything. It loads the artifacts your Kaggle notebook already
-exported and serves them for real-time prediction, EDA, model comparison, and CRUD data
-management.
+### Intelligent Financial Risk Assessment Platform
 
-## 1. Project structure
+*Dual ML pipeline for EMI eligibility classification & maximum safe EMI regression — tracked end-to-end with MLflow.*
 
-```
+[![Live App](https://img.shields.io/badge/🚀_Live_App-Streamlit-3EC6A8?style=for-the-badge)](https://emipredict-ai-027.streamlit.app/)
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-006ACC?style=for-the-badge)](https://xgboost.ai/)
+[![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)](https://mlflow.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](#)
+
+**[🔗 Try the Live App →](https://emipredict-ai-027.streamlit.app/)**
+
+</div>
+
+---
+
+## 📌 Overview
+
+**EMIPredict AI** is a full-stack machine learning platform that assesses loan applicant risk in real time. It combines two ML models working together:
+
+| Model | Task | Output |
+|---|---|---|
+| 🎯 **Classification** | Is the applicant eligible? | `Eligible` · `High_Risk` · `Not_Eligible` |
+| 📈 **Regression** | What's the max safe EMI? | Predicted ₹ amount per month |
+
+Trained on **400,000 records** across 5 EMI scenarios, with **33 engineered features**, and champion models selected via automated comparison — all tracked with **MLflow**.
+
+---
+
+## ✨ Key Results
+
+<div align="center">
+
+| Metric | Result | Target | Status |
+|:---:|:---:|:---:|:---:|
+| **Best Classifier** | XGBoost | — | — |
+| **Accuracy** | 98.65% | > 90% | ✅ **PASS** |
+| **Best Regressor** | XGBoost Regressor | — | — |
+| **RMSE** | ₹581 | < ₹2,000 | ✅ **PASS** |
+
+</div>
+
+---
+
+## 🖥️ App Pages
+
+| Page | What it does |
+|---|---|
+| 🏠 **Home** | Platform overview, KPIs, and navigation |
+| 📊 **Data Exploration** | Interactive EDA — distributions, correlations, demographic risk patterns |
+| 🎯 **Prediction Engine** | Real-time eligibility + max EMI prediction from a live form |
+| 📈 **Model Performance** | Full model comparison, feature importance, confusion matrix, MLflow experiment log |
+| 🗄️ **Data Management** | CRUD interface for loan application records (SQLite-backed) |
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![Scikit--learn](https://img.shields.io/badge/-Scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/-XGBoost-006ACC?style=flat-square)
+![Pandas](https://img.shields.io/badge/-Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
+![Plotly](https://img.shields.io/badge/-Plotly-3F4F75?style=flat-square&logo=plotly&logoColor=white)
+![MLflow](https://img.shields.io/badge/-MLflow-0194E2?style=flat-square&logo=mlflow&logoColor=white)
+![SQLite](https://img.shields.io/badge/-SQLite-07405E?style=flat-square&logo=sqlite&logoColor=white)
+
+</div>
+
+**Models compared:** XGBoost, Random Forest, Decision Tree, Logistic Regression (classification) · XGBoost Regressor, Random Forest, Decision Tree, Linear Regression (regression)
+
+---
+
+## 📁 Project Structure
 emipredict_app/
-├── Home.py                          # Landing dashboard
+├── Home.py # Landing dashboard
 ├── pages/
-│   ├── 1_📊_Data_Exploration.py     # Step 2 EDA, reproduced interactively
-│   ├── 2_🎯_Prediction_Engine.py    # Real-time classification + regression predictions
-│   ├── 3_📈_Model_Performance.py    # Model comparison, feature importance, MLflow summary
-│   └── 4_🗄️_Data_Management.py     # CRUD for loan application records
+│ ├── 1_Data_Exploration.py # Interactive EDA
+│ ├── 2_Prediction_Engine.py # Real-time predictions
+│ ├── 3_Model_Performance.py # Model comparison + MLflow log
+│ └── 4_Data_Management.py # CRUD interface
 ├── utils/
-│   ├── config.py                    # All paths/constants
-│   ├── model_utils.py               # Artifact loading + exact feature-engineering logic
-│   ├── crud.py                      # SQLite CRUD layer
-│   └── styling.py                   # Custom CSS / UI components
-├── artifacts/                       # <-- put your Kaggle artifacts here (see step 3 below)
-├── data/                            # <-- optionally put the raw CSV here (see step 3 below)
+│ ├── config.py # Paths & constants
+│ ├── model_utils.py # Artifact loading + feature engineering
+│ ├── crud.py # SQLite CRUD layer
+│ └── styling.py # Custom CSS / UI components
+├── artifacts/ # Trained model artifacts (.pkl, comparison CSVs)
+├── data/ # Raw dataset (optional, for live EDA)
 ├── requirements.txt
-└── .streamlit/config.toml           # Dark fintech theme
-```
+└── .streamlit/config.toml # Theme config
 
-## 2. Install locally
+
+---
+
+## 🚀 Run Locally
 
 ```bash
-cd emipredict_app
+git clone https://github.com/D0027/emipredict-ai.git
+cd emipredict-ai
+
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+venv\Scripts\activate        # Windows
+# source venv/bin/activate   # macOS/Linux
+
 pip install -r requirements.txt
-```
-
-**Important:** the scikit-learn / xgboost versions installed locally should match (or be
-compatible with) the versions Kaggle used when the `.pkl` files were pickled. If you hit an
-`unpickling` error, check the versions Kaggle installed (`!pip show scikit-learn xgboost` in a
-Kaggle cell) and match them in `requirements.txt`.
-
-## 3. Copy your trained artifacts from Kaggle (required)
-
-You do **not** need to retrain. From your Kaggle notebook's Output panel
-(`/kaggle/working/artifacts/`), download these 7 files and place them in the local
-`artifacts/` folder, keeping the exact filenames:
-
-- `preprocessor.pkl`
-- `target_label_encoder.pkl`
-- `best_classification_model.pkl`
-- `best_regression_model.pkl`
-- `feature_config.pkl`
-- `classification_model_comparison.csv`
-- `regression_model_comparison.csv`
-
-**Optional but recommended** — for the full EDA page and for the app to recompute the
-confusion matrix / actual-vs-predicted plot live: also copy the raw
-`emi_prediction_dataset.csv` into the local `data/` folder.
-
-**Optional** — for the local MLflow UI: copy `mlflow.db` (and the `mlruns/` folder, if you
-used the filesystem store) into the project root, then run:
-```bash
-mlflow ui --backend-store-uri sqlite:///mlflow.db
-```
-
-## 4. Run the app
-
-```bash
 streamlit run Home.py
 ```
 
-Opens at `http://localhost:8501`. The sidebar lets you navigate between pages.
+App opens at `http://localhost:8501`.
 
-## 5. What each page covers vs. the guidance doc
+> ⚠️ **Note:** Model artifacts (`.pkl` files) are already included in `artifacts/`. If you retrain on your own data, keep the same filenames so the app picks them up automatically.
 
-| Guidance requirement | Where it's implemented |
-|---|---|
-| Multi-page app, intuitive UI | `Home.py` + 4 pages, custom dark theme, KPI cards |
-| Real-time classification + regression prediction | `2_🎯_Prediction_Engine.py` |
-| Interactive data exploration/visualization | `1_📊_Data_Exploration.py` (every chart from Step 2 of the notebook) |
-| Model performance / MLflow dashboard | `3_📈_Model_Performance.py` |
-| CRUD for financial data management | `4_🗄️_Data_Management.py` (SQLite-backed) |
+---
 
-## 6. Deploying to Streamlit Cloud (Step 7)
+## 🧠 Model Training Pipeline
 
-1. Push this whole folder (including populated `artifacts/`, excluding the large raw CSV if
-   it's too big for GitHub — the app works without it, just without live EDA/recompute) to a
-   GitHub repo.
-2. If the raw CSV is large, either use Git LFS, host it externally and adjust
-   `RAW_DATASET_PATH`, or skip it — the Prediction Engine and Model Performance pages (minus
-   the live confusion-matrix recompute) work from the `.pkl`/CSV artifacts alone.
-3. Go to [share.streamlit.io](https://share.streamlit.io), connect your GitHub repo, set the
-   main file to `Home.py`, and deploy.
-4. Streamlit Cloud installs from `requirements.txt` automatically.
+1. **Data Prep** — cleaning, missing-value handling, type coercion
+2. **EDA** — eligibility distributions, correlation analysis, demographic risk patterns
+3. **Feature Engineering** — 22 raw → 33 engineered features
+4. **Model Training** — multiple classifiers & regressors compared head-to-head
+5. **MLflow Tracking** — every run logged with hyperparameters, metrics, and artifacts
+6. **Streamlit App** — this repository (real-time inference + dashboards)
+
+All training was performed on Kaggle; this app loads the exported artifacts and serves predictions — **no retraining happens in the app itself**.
+
+---
+
+## 📄 License
+
+This project is open-sourced under the MIT License.
+
+---
+
+<div align="center">
+
+**Built with ❤️ using Python, Streamlit & Scikit-learn**
+
+[🔗 Live App](https://emipredict-ai-027.streamlit.app/) · [🐛 Report an Issue](#)
+
+</div>
