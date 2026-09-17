@@ -133,6 +133,8 @@ if "credit_score" in df.columns:
 # ---------------------------------------------------------------------------
 st.markdown('<div class="section-title">Business Insight Summary</div>', unsafe_allow_html=True)
 summary_cols = [c for c in ["monthly_salary", "credit_score", "bank_balance"] if c in df.columns]
+for col in summary_cols:
+    df[col] = pd.to_numeric(df[col], errors="coerce")
 summary = df.groupby(CLASSIFICATION_TARGET)[summary_cols].mean().round(1)
 st.dataframe(summary, use_container_width=True)
 st.caption(
