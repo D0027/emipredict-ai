@@ -45,6 +45,19 @@ def engineer_features(data: pd.DataFrame) -> pd.DataFrame:
     from the trained pipeline."""
     d = data.copy()
 
+    # --- fix: coerce numeric columns that may arrive as pyarrow/object dtype ---
+    numeric_candidates = [
+        "school_fees", "college_fees", "travel_expenses", "groceries_utilities",
+        "other_monthly_expenses", "current_emi_amount", "monthly_salary",
+        "monthly_rent", "requested_amount", "requested_tenure", "bank_balance",
+        "emergency_fund", "years_of_employment", "dependents", "family_size",
+        "credit_score",
+    ]
+    for col in numeric_candidates:
+        if col in d.columns:
+            d[col] = pd.to_numeric(d[col], errors="coerce")
+    # --- end fix ---
+
     expense_cols = [c for c in ["school_fees", "college_fees", "travel_expenses",
                                  "groceries_utilities", "other_monthly_expenses"] if c in d.columns]
     if expense_cols:
