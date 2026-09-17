@@ -151,6 +151,7 @@ if os.path.exists(RAW_DATASET_PATH):
         for col in all_cols:
             if col not in test_fe.columns:
                 test_fe[col] = 0
+        test_fe[all_cols] = test_fe[all_cols].apply(pd.to_numeric, errors="coerce")
         X_test = preprocessor.transform(test_fe[all_cols])
 
         label_encoder = artifacts["label_encoder"]
